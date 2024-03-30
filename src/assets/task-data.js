@@ -6,6 +6,16 @@ export const TASK_DATA = [
         { name: 'Purchase clothes', done: false },
         { name: 'Order electronics online', done: false },
         { name: 'Get gifts for friends', done: false },
+        { name: 'Restock kitchen supplies', done: false },
+        { name: 'Buy groceries', done: false },
+        { name: 'Purchase clothes', done: false },
+        { name: 'Order electronics online', done: false },
+        { name: 'Get gifts for friends', done: false },
+        { name: 'Restock kitchen supplies', done: false },
+        { name: 'Buy groceries', done: false },
+        { name: 'Purchase clothes', done: false },
+        { name: 'Order electronics online', done: false },
+        { name: 'Get gifts for friends', done: false },
         { name: 'Restock kitchen supplies', done: false }
       ]
     },

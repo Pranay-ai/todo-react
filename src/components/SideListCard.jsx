@@ -1,7 +1,9 @@
-export default function SideListCard({ list,dotted }) {
+export default function SideListCard({ list,dotted,whenClicked }) {
+
+
     return (
         <div className={`listCard ${dotted ? 'dotted-border' : ''}`}>
-            <button><span>{list}</span></button>
+            <button onClick={()=>whenClicked(list)}><span>{list}</span></button>
         </div>
     );
 }

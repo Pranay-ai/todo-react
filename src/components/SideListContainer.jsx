@@ -1,17 +1,23 @@
-import { TASK_DATA } from "../assets/task-data";
-import SideListCard from "./SideListCard";
-export default function SideListContainer() {
 
-  const [currentList, setCurrentList] = useState("New List + ");
+import SideListCard from "./SideListCard";
+export default function SideListContainer({whenButton,TASK_DATA}) {
+
+    function handleChange(list) {
+        whenButton(list);
+    }
+    
+
+
   return (
+    
         <div className="totalSide">
-            <div className="NewOption"><SideListCard dotted={true} list="New List + " /></div>
+            <div className="NewOption"><SideListCard whenClicked={handleChange} dotted={true} list="New List + " /></div>
             <hr  />
             <div className="side-list-container">
 
         <>
         {TASK_DATA.map((list, index) => {
-            return <SideListCard key={index} list={list.name} />;
+            return <SideListCard key={index} whenClicked={handleChange} list={list.name} />;
         })}
 
         </>
