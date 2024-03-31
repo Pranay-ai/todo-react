@@ -1,6 +1,10 @@
 import deleteIcon from '/deleticon.svg';
+import { TaskDataContext } from '../store/TaskDataContext';
+import { useContext } from 'react';
 import tick from '/tickIcon.svg'
-export default function TaskCard({taskId,list, tasks , setTaskDone, deleteTask, status}) {
+export default function TaskCard({taskId,list, tasks , status}) {
+
+    const { setTaskDone, deleteTask } = useContext(TaskDataContext);
 
     function handleDone() {
         setTaskDone(taskId, list);

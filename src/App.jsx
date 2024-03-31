@@ -1,7 +1,7 @@
 // import ListsContainer from "./components/SideListContainer";
 import Header from "./components/Header";
 import SideListContainer from "./components/SideListContainer";
-import { TASK_DATA } from "./assets/task-data";
+import { TaskDataContext } from "./store/TaskDataContext";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import TaskSection from "./components/TaskSection";
@@ -73,15 +73,16 @@ export default function App() {
 const currentListData = (currentList === "New List +") ? null : taskData.find((listItem) => listItem.name === currentList); 
 console.log(currentListData);
   return (
-    <div className="App">
+    <TaskDataContext.Provider value={{currentListData, taskData, addNewList,addnewTask,deleteList,deleteTask,setTaskDone,handleChange}}>
+
         <Header />
         <div className="SuperContainer">
-        <SideListContainer TASK_DATA={taskData} taskDelete={deleteList} whenButton={handleChange} />
-        <TaskSection list={currentListData} addNewList={addNewList} addnewTask={addnewTask} setTaskDone={setTaskDone} deleteTask={deleteTask} />
+        <SideListContainer  />
+        <TaskSection />
         </div>
 
         <Footer />
+    </ TaskDataContext.Provider>
 
-    </div>
   );
 }

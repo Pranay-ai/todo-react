@@ -1,23 +1,22 @@
-
+import { TaskDataContext } from "../store/TaskDataContext";
+import { useContext } from "react";
 import SideListCard from "./SideListCard";
-export default function SideListContainer({whenButton,TASK_DATA,taskDelete}) {
+export default function SideListContainer({TASK_DATA,taskDelete}) {
 
-    function handleChange(list) {
-        whenButton(list);
-    }
+    const {taskData, handleChange} = useContext(TaskDataContext);
     
 
 
   return (
     
         <div className="totalSide">
-            <div className="NewOption"><SideListCard taskDelete={taskDelete} whenClicked={handleChange} dotted={true} list="New List + " /></div>
+            <div className="NewOption"><SideListCard  dotted={true} list="New List + " /></div>
             <hr  />
             <div className="side-list-container">
 
         <>
-        {TASK_DATA.map((list, index) => {
-            return <SideListCard key={index} taskDelete={taskDelete} whenClicked={handleChange} list={list.name} />;
+        {taskData.map((list, index) => {
+            return <SideListCard key={index} list={list.name} />;
         })}
 
         </>

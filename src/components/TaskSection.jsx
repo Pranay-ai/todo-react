@@ -1,9 +1,11 @@
 import TaskCard from "./TaskCard";
+import { TaskDataContext } from "../store/TaskDataContext";
+import { useContext } from "react";
 import tick from "/tickIcon.svg";
 import { useRef } from "react";
 
-export default function TaskSection({ list , addNewList, addnewTask, setTaskDone, deleteTask}) {
-
+export default function TaskSection() {
+    const {currentListData,addNewList,addnewTask} = useContext(TaskDataContext);
     const newListRender = () => {
         const NewListRef=useRef();
         function handleSetListName() {
@@ -28,26 +30,26 @@ export default function TaskSection({ list , addNewList, addnewTask, setTaskDone
         function handleSetTask() {
             const taskName = newTaskRef.current.value;
             if (!taskName) return;
-            addnewTask(taskName, list.name);
+            addnewTask(taskName, currentListData.name);
             newTaskRef.current.value = "";
         }
         const newTaskRef=useRef();
         return (
             <div className="TaskSection">
                 <div className="TaskDescription">
-                    <h1>{list.name}</h1>
+                    <h1>{currentListData.name}</h1>
                 </div>
                 <hr />
                 <div className="TaskLists">
                 <div className="setNewList"><input  ref={newTaskRef} type="text" placeholder="Add New task" />
                     <button onClick={handleSetTask} ><img src={tick} alt="" srcset="" /></button></div>
-                    {list.tasks.map((task) => (
-                        <TaskCard taskId={task.id} status={task.done} list={list.name} setTaskDone={setTaskDone} deleteTask={deleteTask} key={task.id} tasks={task.name} />
+                    {currentListData.tasks.map((task) => (
+                        <TaskCard taskId={task.id} status={task.done} list={currentListData.name}  key={task.id} tasks={task.name} />
                     ))}
                 </div>
             </div>
         );
     };
 
-    return <>{list ? defaultListRender() : newListRender()}</>;
+    return <>{currentListData ? defaultListRender() : newListRender()}</>;
 }
