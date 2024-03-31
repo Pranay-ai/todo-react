@@ -1,12 +1,20 @@
 import deleteIcon from '/deleticon.svg';
 import tick from '/tickIcon.svg'
-export default function TaskCard({ tasks }) {
+export default function TaskCard({taskId,list, tasks , setTaskDone, deleteTask, status}) {
+
+    function handleDone() {
+        setTaskDone(taskId, list);
+    }
+
+    function handleDelete() {
+        deleteTask(taskId, list);
+    }
     return(
     <div className="taskCard">
-        <h2>{tasks}</h2>
+        <h2 className={status ?  'TaskDone': ''}>{tasks}</h2>
         <div className='TaskIcons'>
-        <button><img src={tick} alt="" /></button>
-        <button><img src={deleteIcon} alt="" /></button>
+        <button onClick={handleDone}><img src={tick} alt="" /></button>
+        <button onClick={handleDelete}><img src={deleteIcon} alt="" /></button>
         </div>
 
         
