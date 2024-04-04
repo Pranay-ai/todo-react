@@ -7,11 +7,6 @@ export default function SideListContainer() {
 
   return (
     <div className="totalSide">
-      {isMobile && (
-        <button className="menuToggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <span className="menuIcon"></span>
-        </button>
-      )}
       {(!isMobile || isMenuOpen) && (
         <>
           <div className="NewOption">

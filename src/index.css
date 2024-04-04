@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 .listCard {
@@ -43,8 +44,8 @@ body {
 .side-list-container {
   background-color: rgb(61, 61, 61);
   overflow-y: auto;
-  height: 80vh;
-  padding: 10vh 0 0 0;
+  height: 87.5%;
+  padding: 5% 0 0 0;
   align-items: center;
 }
 
@@ -63,7 +64,7 @@ hr {
 
 .NewOption {
   background-color: rgb(61, 61, 61);
-  height: 20%;
+  height: 10%;
 }
 
 .side-list-container::-webkit-scrollbar {
@@ -95,16 +96,21 @@ hr {
 .headerSection {
   background-color: rgb(0, 0, 0);
   color: whitesmoke;
-  margin: 0;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   font-family: 'Courier New', Courier, monospace;
-  align-content: baseline;
+  height: 100%;
+}
+.headerSection h1{
+  font-size: 1rem;
+  padding: 0px 0px 0px 0px;
+
 }
 
 .headerSection p {
-  font-size: 1.5em;
-  padding: 30px 0px 0px 0px;
+  font-size: 1rem;
+  padding: 1rem 0 0 1rem;
 }
 
 .FooterSection {
@@ -115,11 +121,18 @@ hr {
   justify-content: center;
   font-family: 'Courier New', Courier, monospace;
   align-content: baseline;
+  height: 100%;
+}
+.heading{
+  display: flex;
+  flex-direction: row;
+  align-content: baseline;
+  align-items: center;
 }
 
 .FooterSection p {
-  font-size: 1.5em;
-  padding: 30px 0px 0px 0px;
+  font-size: 100%;
+  /* padding: 30px 0px 0px 0px; */
 }
 
 .SuperContainer {
@@ -136,7 +149,7 @@ hr {
 
 .TaskDescription {
   font-family: 'Courier New', Courier, monospace;
-  height: 20vh;
+  height: 10%;
 }
 
 .setNewList input {
@@ -161,11 +174,12 @@ hr {
 }
 
 .TaskLists {
-  padding: 50px 0 0 0;
+  padding: 2.5% 0 0 0;
   overflow-y: auto;
-  max-height: 80vh;
+  max-height: 80%;
 }
 .setNewList{
+  padding-top: 5%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -227,49 +241,18 @@ hr {
   background: #555;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .totalSide {
-      width: 100%;
-      height: auto;
-      padding-bottom: 20px;
-  }
 
-  .TaskSection {
-      width: 100%;
-      padding: 20px;
-  }
-
-  .SuperContainer {
-      flex-direction: column;
-  }
-
-  .side-list-container {
-      padding: 10vh 0 0 0;
-  }
-
-  .listCard {
-      padding: 20px 5px;
-      font-family: 'Courier New', Courier, monospace;
-      
-  }
-
-  .taskCard {
-      flex-direction: column;
-      align-items: center;
-  }
-}
 
 #header{
-  height: 10%;
+  height: 5%;
 }
 
 #footer{
-  height: 10%;
+  height: 5%;
 }
 
 #root{
-  height: 80%;
+  height: 90%;
 }
 
 
@@ -324,13 +307,13 @@ dialog::backdrop {
   display: inline-block;
   width: 30px;
   height: 3px;
-  background-color: black;
+  background-color: white;
   position: relative;
 }
 
 .menuIcon::before, .menuIcon::after {
   content: '';
-  background-color: black;
+  background-color: white;
   width: 30px;
   height: 3px;
   display: block;
@@ -349,10 +332,78 @@ dialog::backdrop {
 
 
 @media screen and (max-width: 768px) {
+  #header{
+    height: 10%;
+  }
+  
+  #footer{
+    height: 10%;
+  }
+  
+  #root{
+    height: 80%;
+  }
   dialog {
     width: 90%;
   }
 
+ .totalSide{
+  width: 100%;
+  height: 100%;
 
-  
+ }
+ .headerSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.heading{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ .headerSection p{
+  font-size: 1em;
+  padding: 0px 0px 0px 0px;
+ }
+ .headerSection h1{
+  font-size: 1em;
+  padding: 0px 0px 0px 0px;
+ }
+
+
+
+
+.FooterSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.FooterSection p{
+  font-size: 1em;
+  padding: 0px 0px 0px 0px;
+}
+
+
+
+.TaskSection{
+  height:100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.TaskDescription{
+  height: 10%;
+}
+.TaskLists{
+  height: 80%;
+  overflow-y: auto;
+}
+
 }

@@ -5,13 +5,20 @@ import tick from "/tickIcon.svg";
 import { useRef } from "react";
 
 export default function TaskSection() {
-    const {currentListData,addNewList,addnewTask} = useContext(TaskDataContext);
+    const {currentListData,addNewList,addnewTask,taskData,handleChange} = useContext(TaskDataContext);
     const newListRender = () => {
         const NewListRef=useRef();
         function handleSetListName() {
             const listName = NewListRef.current.value;
-            if (!listName) return;
-            addNewList(listName);
+            const listIndex = taskData.findIndex(list => list.name.toLowerCase() === listName.toLowerCase());
+            console.log(listIndex);
+            if (listIndex === -1) {
+                addNewList(listName);
+                handleChange(listName);
+            }
+            if(listIndex !== -1){
+                handleChange(taskData[listIndex].name);
+            }
         }
         return (
             <div className="TaskSection">
