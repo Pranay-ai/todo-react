@@ -313,3 +313,46 @@ dialog::backdrop {
 .ModalOptions button:active {
   background-color: #d3d3d3;
 }
+
+.menuToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menuIcon {
+  display: inline-block;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  position: relative;
+}
+
+.menuIcon::before, .menuIcon::after {
+  content: '';
+  background-color: black;
+  width: 30px;
+  height: 3px;
+  display: block;
+  position: absolute;
+  left: 0;
+}
+
+.menuIcon::before {
+  top: -10px;
+}
+
+.menuIcon::after {
+  top: 10px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  dialog {
+    width: 90%;
+  }
+
+
+  
+}

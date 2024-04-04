@@ -6,16 +6,22 @@ export default function SideListCard({ list,dotted}) {
 
     const modalRef = useRef();
 
-    const {handleChange } = useContext(TaskDataContext);
+    const {handleChange,handleCloseMenu ,isMenuOpen } = useContext(TaskDataContext);
 
     function handleDelete() {
         modalRef.current.showModal();
     }
 
+    function handleSomeChanges(list){
+        console.log("inHandleChange")
+        {isMenuOpen && handleCloseMenu();}
+        handleChange(list);
+    }
+
 
     return (
         <div className={`listCard ${dotted ? 'dotted-border' : ''}`}>
-            <button onClick={()=>handleChange(list)}><span>{list}</span></button>
+            <button onClick={()=>handleSomeChanges(list)}><span>{list}</span></button>
             {dotted ? <></>:<button onClick={handleDelete}><img src={deleteicon} alt="" /></button>}
             <Modal title="CONFIRM DELETE" ref={modalRef} list={list}  />
         </div>
