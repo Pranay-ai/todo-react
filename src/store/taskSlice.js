@@ -13,7 +13,7 @@ export const fetchTaskData = createAsyncThunk("task/fetchTaskData", async (args,
         if (!response.ok) {
             throw new Error("Server responded with an error!");
         }
-        const data = await response.json();
+        var data = await response.json();
         console.log(data);
         if(data===null) data=[];
         dispatch(replaceTaskData(data))

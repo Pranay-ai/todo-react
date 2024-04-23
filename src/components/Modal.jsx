@@ -11,7 +11,7 @@ const Modal = forwardRef(function Modal(
   
    function handleDelete(){
     console.log('Delete list:', list);
-    dispatch(deleteList({listName:list}));
+    dispatch(deleteList(list));
     close();
 
    }
