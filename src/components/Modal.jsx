@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
-import { TaskDataContext } from '../store/TaskDataContext';
-import { useContext } from 'react';
 import { forwardRef } from 'react';
+import { deleteList } from '../store/taskSlice';
+import { useDispatch} from 'react-redux';
 
 
 const Modal = forwardRef(function Modal(
@@ -11,7 +11,7 @@ const Modal = forwardRef(function Modal(
   
    function handleDelete(){
     console.log('Delete list:', list);
-    deleteList(list);
+    dispatch(deleteList(list));
     close();
 
    }
@@ -20,7 +20,7 @@ const Modal = forwardRef(function Modal(
     ref.current.close();
   }
 
-  const { deleteList } = useContext(TaskDataContext);
+  const dispatch = useDispatch();
 
   return createPortal(
     <dialog id="modal" ref={ref}>

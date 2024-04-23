@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { TaskDataContext } from "../store/TaskDataContext";
 import SideListCard from "./SideListCard";
+import { useSelector } from "react-redux";
 
 export default function SideListContainer() {
-  const { taskData, isMobile, isMenuOpen, setIsMenuOpen } = useContext(TaskDataContext);
+  const taskData=useSelector((state)=>state.task.taskData);
+  const isMobile=useSelector((state)=>state.ui.isMobile);
+  const isMenuOpen=useSelector((state)=>state.ui.isMenuOpen);
+
 
   return (
     <div className="totalSide">

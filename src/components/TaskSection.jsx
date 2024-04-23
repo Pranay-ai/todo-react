@@ -2,10 +2,20 @@ import TaskCard from "./TaskCard";
 import { TaskDataContext } from "../store/TaskDataContext";
 import { useContext } from "react";
 import tick from "/tickIcon.svg";
+import { addNewList, addNewTask } from "../store/taskSlice";
+import { uiActions } from "../store/uiSlice";
+import { useDispatch,useSelector } from "react-redux";
 import { useRef } from "react";
 
 export default function TaskSection() {
-    const {currentListData,addNewList,addnewTask,taskData,handleChange} = useContext(TaskDataContext);
+
+    const currentList = useSelector((state) => state.ui.currentList);
+    
+    const dispatch = useDispatch();
+
+    const taskData = useSelector((state) => state.task.taskData);
+
+    const currentListData = (currentList === "New List +") ? null : taskData.find((listItem) => listItem.name === currentList);
     const newListRender = () => {
         const NewListRef=useRef();
         function handleSetListName() {
@@ -13,11 +23,11 @@ export default function TaskSection() {
             const listIndex = taskData.findIndex(list => list.name.toLowerCase() === listName.toLowerCase());
             console.log(listIndex);
             if (listIndex === -1) {
-                addNewList(listName);
-                handleChange(listName);
+                dispatch(addNewList(listName));
+                dispatch(uiActions.handleChange(listName));
             }
             if(listIndex !== -1){
-                handleChange(taskData[listIndex].name);
+                dispatch(uiActions.handleChange(taskData[listIndex].name));
             }
         }
         return (
@@ -25,7 +35,7 @@ export default function TaskSection() {
                 <div className="TaskDescription">
                     <h1>Enter Your List Name</h1>
                     <div className="setNewList"><input ref={NewListRef} type="text" placeholder="My List..." />
-                    <button onClick={handleSetListName}><img src={tick} alt="" srcset="" /></button></div>
+                    <button onClick={handleSetListName}><img src={tick} alt=""  /></button></div>
                 </div>
                 <hr />
 
@@ -35,9 +45,10 @@ export default function TaskSection() {
 
     const defaultListRender = () => {
         function handleSetTask() {
+            console.log("inHandleTask")
             const taskName = newTaskRef.current.value;
             if (!taskName) return;
-            addnewTask(taskName, currentListData.name);
+            dispatch(addNewTask({taskName:taskName, listName:currentListData.name}));
             newTaskRef.current.value = "";
         }
         const newTaskRef=useRef();

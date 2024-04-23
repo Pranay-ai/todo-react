@@ -1,17 +1,17 @@
 import deleteIcon from '/deleticon.svg';
-import { TaskDataContext } from '../store/TaskDataContext';
-import { useContext } from 'react';
 import tick from '/tickIcon.svg'
+import { deleteTask,setTaskDone } from '../store/taskSlice';
+import { useDispatch } from 'react-redux';
 export default function TaskCard({taskId,list, tasks , status}) {
 
-    const { setTaskDone, deleteTask } = useContext(TaskDataContext);
+    const dispatch = useDispatch();
 
     function handleDone() {
-        setTaskDone(taskId, list);
+        dispatch(setTaskDone({taskId:taskId, listName:list}));
     }
 
     function handleDelete() {
-        deleteTask(taskId, list);
+        dispatch(deleteTask({taskId:taskId, listName:list}));
     }
     return(
     <div className="taskCard">

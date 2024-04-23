@@ -1,12 +1,16 @@
 import deleteicon from '/deleticon.svg';
-import { TaskDataContext } from '../store/TaskDataContext';
-import { useContext , useRef} from 'react';
+import {  useRef} from 'react';
+import {useSelector,useDispatch} from 'react-redux';
 import Modal from './Modal.jsx';
+import { uiActions } from '../store/uiSlice';
 export default function SideListCard({ list,dotted}) {
 
     const modalRef = useRef();
+    const dispatch=useDispatch();
 
-    const {handleChange,handleCloseMenu ,isMenuOpen } = useContext(TaskDataContext);
+    const isMenuOpen=useSelector((state)=>state.ui.isMenuOpen);
+
+
 
     function handleDelete() {
         modalRef.current.showModal();
@@ -14,8 +18,8 @@ export default function SideListCard({ list,dotted}) {
 
     function handleSomeChanges(list){
         console.log("inHandleChange")
-        {isMenuOpen && handleCloseMenu();}
-        handleChange(list);
+        {isMenuOpen && dispatch(uiActions.handleCloseMenu())}
+        dispatch(uiActions.handleChange(list));
     }
 
 
