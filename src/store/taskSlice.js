@@ -2,16 +2,20 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    taskData:[]
+    taskData:[],
+    madeChanges:false
 }
 
-export const fetchTaskData = createAsyncThunk("task/fetchTaskData", async (dispatch,replaceTaskData) => {
+export const fetchTaskData = createAsyncThunk("task/fetchTaskData", async (args, {dispatch,rejectWithValue}) => {
    async function fetchTaskData() {
-        const response = await fetch("https://todolist-72889-default-rtdb.firebaseio.com/", { method: "GET"});
+        console.log("Fetching data...");
+        const response = await fetch("https://todolist-72889-default-rtdb.firebaseio.com/task.json", { method: "GET"});
         if (!response.ok) {
             throw new Error("Server responded with an error!");
         }
         const data = await response.json();
+        console.log(data);
+        if(data===null) data=[];
         dispatch(replaceTaskData(data))
     }
 
@@ -21,14 +25,15 @@ export const fetchTaskData = createAsyncThunk("task/fetchTaskData", async (dispa
     
     } catch (error) {
         console.log(error.message);
+        return rejectWithValue(error.message);
     }
 }
 );
 
 
-export const pushTaskData = createAsyncThunk("task/pushTaskData", async (data) => {
+export const pushTaskData = createAsyncThunk("task/pushTaskData", async (data,{dispatch,rejectWithValue}) => {
     async function pushTaskData() {
-        const response = await fetch("https://todolist-72889-default-rtdb.firebaseio.com/", {
+        const response = await fetch("https://todolist-72889-default-rtdb.firebaseio.com/task.json", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -45,6 +50,7 @@ export const pushTaskData = createAsyncThunk("task/pushTaskData", async (data) =
         console.log("Data pushed successfully!");
     } catch (error) {
         console.log(error.message);
+        return rejectWithValue(error.message);
     }
 }
 );
@@ -60,7 +66,8 @@ const taskSlice = createSlice({
             state.taskData.push({ name: action.payload, tasks: [], id: state.taskData.length + 1 });
         },
         setTaskDone: (state, action) => {
-            state.taskData.map((list) => {
+            state.madeChanges=true;
+            state.taskData=state.taskData.map((list) => {
                 if (list.name === action.payload.listName) {
                     return {
                         ...list,
@@ -78,7 +85,8 @@ const taskSlice = createSlice({
             })
         },
         deleteTask: (state, action) => {
-            state.taskData.map((list) => {
+            state.taskData=state.taskData.map((list) => {
+                state.madeChanges=true;
                 if (list.name === action.payload.listName) {
                     return {
                         ...list,
@@ -90,8 +98,8 @@ const taskSlice = createSlice({
             })
         },
         addNewTask: (state, action) => {
-            console.log(action.payload);
-            state.taskData.map((list) => {
+            state.madeChanges=true;
+            state.taskData=state.taskData.map((list) => {
                 if (list.name === action.payload.listName) {
                     return {
                         ...list,
@@ -107,6 +115,7 @@ const taskSlice = createSlice({
         },
 
         deleteList: (state, action) => {
+            state.madeChanges=true;
             state.taskData = state.taskData.filter((list) => list.name !== action.payload);
         }
     }

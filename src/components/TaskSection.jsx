@@ -16,6 +16,8 @@ export default function TaskSection() {
     const taskData = useSelector((state) => state.task.taskData);
 
     const currentListData = (currentList === "New List +") ? null : taskData.find((listItem) => listItem.name === currentList);
+    console.log("currentListData")
+    console.log(currentListData);
     const newListRender = () => {
         const NewListRef=useRef();
         function handleSetListName() {
@@ -60,7 +62,7 @@ export default function TaskSection() {
                 <hr />
                 <div className="TaskLists">
                 <div className="setNewList"><input  ref={newTaskRef} type="text" placeholder="Add New task" />
-                    <button onClick={handleSetTask} ><img src={tick} alt="" srcset="" /></button></div>
+                    <button onClick={handleSetTask} ><img src={tick} alt=""  /></button></div>
                     {currentListData.tasks.map((task) => (
                         <TaskCard taskId={task.id} status={task.done} list={currentListData.name}  key={task.id} tasks={task.name} />
                     ))}

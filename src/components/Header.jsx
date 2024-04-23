@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import { uiActions } from "../store/uiSlice";
 import { useDispatch,useSelector } from "react-redux";
-import { useContext } from "react";
+
 export default function Header() {
     const isMobile=useSelector((state)=>state.ui.isMobile);
     const isMenuOpen=useSelector((state)=>state.ui.isMenuOpen);

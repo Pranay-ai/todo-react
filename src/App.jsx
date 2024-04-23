@@ -12,15 +12,17 @@ export default function App() {
 
   const dispatch = useDispatch();
 
+  const madeChanges = useSelector((state) => state.task.madeChanges);
+
   const taskData = useSelector((state) => state.task.taskData);
   console.log(taskData);
 
   useEffect(() => {
-    fetchTaskData(replaceTaskData);
+    dispatch(fetchTaskData());
   }, []);
 
   useEffect(() => {
-    pushTaskData(taskData);
+    if (madeChanges) dispatch(pushTaskData(taskData));
   }, [taskData]);
 
   useEffect(() => {
