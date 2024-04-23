@@ -1,12 +1,15 @@
 import { createPortal } from "react-dom";
-import { TaskDataContext } from "../store/TaskDataContext";
-import { useContext } from "react";
+import { uiActions } from "../store/uiSlice";
+import { useDispatch,useSelector } from "react-redux";
+
 export default function Header() {
-    const { isMobile, isMenuOpen, setIsMenuOpen } = useContext(TaskDataContext);
+    const isMobile=useSelector((state)=>state.ui.isMobile);
+    const isMenuOpen=useSelector((state)=>state.ui.isMenuOpen);
+    const dispatch = useDispatch();
     return createPortal(
         <div className="headerSection">
                 {isMobile && (
-        <button className="menuToggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="menuToggle" onClick={() => dispatch(uiActions.setIsMenuOpen(!isMenuOpen))}>
           <span className="menuIcon"></span>
         </button>
       )}

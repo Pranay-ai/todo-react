@@ -1,11 +1,12 @@
 // MainContent.jsx
-import React, { useContext } from 'react';
 import SideListContainer from './SideListContainer';
 import TaskSection from './TaskSection';
-import { TaskDataContext } from '../store/TaskDataContext';
+import { useSelector } from 'react-redux';
+
 
 export default function MainComponent() {
-  const { isMenuOpen, isMobile } = useContext(TaskDataContext);
+  const isMobile=useSelector((state)=>state.ui.isMobile);
+  const isMenuOpen=useSelector((state)=>state.ui.isMenuOpen);
 
   if (isMobile) {
     return (
